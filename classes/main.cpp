@@ -1,4 +1,5 @@
 #include <iostream>
+#include "burrito.h"
 
 using namespace std;
 
@@ -6,16 +7,19 @@ void printCrap(int x) {
     cout << "my favorite number is " << x << endl;
 }
 
-class mySuperClass {
+class MySuperClass {
 private:
     string name;
 
 public:
+    MySuperClass(string n) {
+        name = n;
+    }
     void coolSaying() {
         cout << "some crap" << endl;
     }
 
-    mySuperClass setName(string x) {
+    MySuperClass setName(string x) {
         name = x;
         return *this;
     }
@@ -27,10 +31,13 @@ public:
 
 int main() {
     printCrap(20);
-    mySuperClass obj;
+    MySuperClass Obj("hola!");
 
-    cout << obj.setName("hi2").getName() << endl;
-    obj.coolSaying();
+    cout << Obj.getName() << endl;
+    Obj.coolSaying();
+
+    Burrito b;
+
     return 0;
 }
 
