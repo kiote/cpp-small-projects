@@ -4,6 +4,8 @@
 using namespace std;
 int tuna = 69;
 
+int bucky[5] = {1,2,3,4,5};
+
 void printCrap(int x) {
     cout << "my favorite number is " << x << endl;
 }
@@ -39,7 +41,18 @@ int main() {
 
     Burrito b;
 
-    cout << ::tuna;
+    cout << ::tuna << endl;
+
+    cout << "array elem" << bucky[2] << endl;
+
+
+    // pointers
+    int fish = 5;
+    int *fishPointer;
+
+    fishPointer = &fish;
+
+    cout << "fishPointer: " << fishPointer << endl;
 
     return 0;
 }
