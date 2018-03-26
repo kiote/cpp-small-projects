@@ -40,6 +40,7 @@ int main() {
     Obj.coolSaying();
 
     Burrito b;
+    b.printCrap();
 
     cout << ::tuna << endl;
 
