@@ -2,6 +2,7 @@
 #include "burrito.h"
 
 using namespace std;
+int tuna = 69;
 
 void printCrap(int x) {
     cout << "my favorite number is " << x << endl;
@@ -37,6 +38,8 @@ int main() {
     Obj.coolSaying();
 
     Burrito b;
+
+    cout << ::tuna;
 
     return 0;
 }
