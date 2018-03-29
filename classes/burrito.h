@@ -4,6 +4,7 @@
 class Burrito {
     public:
         Burrito();
+        void printCrap();
 };
 
 #endif
