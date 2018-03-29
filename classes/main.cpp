@@ -10,6 +10,10 @@ void printCrap(int x) {
     cout << "my favorite number is " << x << endl;
 }
 
+void passByReference(int* x) {
+    *x = 89;
+}
+
 class MySuperClass {
 private:
     string name;
@@ -53,6 +57,11 @@ int main() {
     fishPointer = &fish;
 
     cout << "fishPointer: " << fishPointer << endl;
+
+    int betty = 60;
+    passByReference(&betty);
+
+    cout << "betty is now " << betty << endl;
 
     return 0;
 }
