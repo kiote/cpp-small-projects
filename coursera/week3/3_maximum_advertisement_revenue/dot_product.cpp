@@ -2,9 +2,13 @@
 #include <iostream>
 #include <vector>
 
-using std::vector;
+using namespace std;
+
+bool desc(int a, int b) { return a < b; };
 
 long long max_dot_product(vector<int> a, vector<int> b) {
+  sort(a.begin(), a.end(), desc);
+  sort(b.begin(), b.end(), desc);
   // write your code here
   long long result = 0;
   for (size_t i = 0; i < a.size(); i++) {
