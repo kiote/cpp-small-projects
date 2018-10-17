@@ -14,7 +14,7 @@ int main() {
     cin >> curNum;
     numbers.push_back(curNum);
     
-    for (int i=0; i<numbers.size()-1; ++i) {
+    for (int i=0; i<numbers.size()-2; ++i) {
         cout << numbers[i] << endl;
     }
 
