@@ -1,20 +1,36 @@
 #include <iostream>
 #include <cassert>
 #include <vector>
+#include <algorithm>
 
-using std::vector;
 
-int binary_search(const vector<int> &a, int x) {
-  int left = 0, right = (int)a.size(); 
-  //write your code here
-}
+using namespace std;
 
-int linear_search(const vector<int> &a, int x) {
-  for (size_t i = 0; i < a.size(); ++i) {
-    if (a[i] == x) return i;
-  }
-  return -1;
-}
+int binarySearch(vector<int> arr, int l, int r, int x) 
+{ 
+   if (r >= l) 
+   { 
+        int mid = l + (r - l)/2; 
+  
+        // If the element is present at the middle  
+        // itself 
+        if (arr[mid] == x)   
+            return mid; 
+  
+        // If element is smaller than mid, then  
+        // it can only be present in left subarray 
+        if (arr[mid] > x)  
+            return binarySearch(arr, l, mid-1, x); 
+  
+        // Else the element can only be present 
+        // in right subarray 
+        return binarySearch(arr, mid+1, r, x); 
+   } 
+  
+   // We reach here when element is not  
+   // present in array 
+   return -1; 
+} 
 
 int main() {
   int n;
@@ -30,7 +46,6 @@ int main() {
     std::cin >> b[i];
   }
   for (int i = 0; i < m; ++i) {
-    //replace with the call to binary_search when implemented
-    std::cout << linear_search(a, b[i]) << ' ';
+    cout << binarySearch(a, 0, a.size()-1, b[i]) << ' ';
   }
 }
