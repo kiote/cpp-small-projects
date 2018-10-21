@@ -3,33 +3,23 @@
 #include <vector>
 #include <algorithm>
 
-
 using namespace std;
 
-int binarySearch(vector<int> arr, int l, int r, int x) 
+
+int binarySearch(const vector<int> &arr, int l, int r, int x) 
 { 
-   if (r >= l) 
-   { 
-        int mid = l + (r - l)/2; 
-  
-        // If the element is present at the middle  
-        // itself 
-        if (arr[mid] == x)   
-            return mid; 
-  
-        // If element is smaller than mid, then  
-        // it can only be present in left subarray 
-        if (arr[mid] > x)  
-            return binarySearch(arr, l, mid-1, x); 
-  
-        // Else the element can only be present 
-        // in right subarray 
-        return binarySearch(arr, mid+1, r, x); 
-   } 
-  
-   // We reach here when element is not  
-   // present in array 
-   return -1; 
+  if (r < l) {
+    return -1;
+  }
+
+  int mid = l + (r - l)/2; 
+
+  if (arr[mid] == x)   
+      return mid; 
+  if (arr[mid] > x) {
+      return binarySearch(arr, l, mid-1, x);
+  }
+  return binarySearch(arr, mid+1, r, x); 
 } 
 
 int main() {
@@ -45,7 +35,10 @@ int main() {
   for (int i = 0; i < m; ++i) {
     std::cin >> b[i];
   }
-  for (int i = 0; i < m; ++i) {
-    cout << binarySearch(a, 0, a.size()-1, b[i]) << ' ';
+  int i = 0;
+  int size = a.size()-1;
+  while (i < m) {
+    cout << binarySearch(a, 0, size, b[i]) << ' ';
+    ++i;
   }
 }
