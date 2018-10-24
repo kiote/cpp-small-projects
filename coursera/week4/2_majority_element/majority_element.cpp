@@ -2,56 +2,77 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
+using std::vector;
 
-int get_freq(vector<int> &a, int x, int left, int right) {
-  if (x == -1) {
-    return 0;
-  }
-  int count = 0, i = left;
-  while (i <= right) {
-    if (a[i] == x) {
-      ++count;
-    }
-    ++i;
-  }
-  // cout << "freq of " << x << ": " << count << endl;
-  return count;
+unsigned int count(const vector<int> &a, int left, int right, int element)
+{
+	unsigned int count = 0;
+	for (unsigned int i = left; i <= right; i++)
+	{
+		if (a[i] == element)
+		{
+			count++;
+		}
+	}
+	return count;
 }
 
 int get_majority_element(vector<int> &a, int left, int right) {
-  int size = a.size();
+	using std::cout;
+	using std::endl;
+	// Divide and Conquer Algorithm, O(nlog(n))
+	if (left > right) return -1;
+	if (left == right) return a[left];
+	int mid = left + (right - left) / 2;
+	int leftCount = get_majority_element(a, left, mid);
+	int rightCount = get_majority_element(a, mid + 1, right);
+	if (leftCount == -1 && rightCount != -1)
+	{
+		unsigned int num = count(a, left, right, rightCount);
+		if (num > (right - left + 1) / 2)
+		{
+			return rightCount;
+		}
+		else
+		{
+			return -1;
+		}
 
-  int max = (right-left)/2;
+	}
+	else if (rightCount == -1 && leftCount != -1)
+	{
+		unsigned int num = count(a, left, right, leftCount);
+		if (num > (right - left + 1) / 2)
+		{
+			return leftCount;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+	else if (leftCount != -1 && rightCount != -1)
+	{
+		unsigned int leftNum = count(a, left, right, leftCount);
+		unsigned int rightNum = count(a, left, right, rightCount);
+		if (leftNum > (right - left + 1) / 2)
+		{
+			return leftCount;
+		}
+		else if (rightNum > (right - left + 1) / 2)
+		{
+			return rightCount;
+		}
+		else
+		{
+			return -1;
+		}
+	}
+	else
+	{
+		return -1;
+	}
 
-  if (size%2 == 0) {
-    ++max;
-  }
-
-  if (left == right) {
-    return -1;
-  }
-  if ((left + 1) == right) {
-    return a[left];
-  }
-
-  int k = (left + right - 1)/2 + 1;
-  int leftM = get_majority_element(a, left, k);
-  int rightM = get_majority_element(a, k, right);
-
-  // cout << "max: " << max << endl;
-
-  int leftCount = get_freq(a, leftM, left, right);
-  if (leftCount > max) {
-    return leftCount;
-  }
-
-  int rightCount = get_freq(a, rightM, left, right);
-  if (rightCount > max) {
-    return rightCount;
-  }
-
-  return -1;
 }
 
 int main() {
