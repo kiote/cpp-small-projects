@@ -4,57 +4,51 @@
 
 using namespace std;
 
-int get_freq(vector<int> &a, int x) {
+int get_freq(vector<int> &a, int x, int left, int right) {
   if (x == -1) {
     return 0;
   }
-  int count = 0, i = 0, end = a.size()-1;
-  while (i <= end) {
+  int count = 0, i = left;
+  while (i <= right) {
     if (a[i] == x) {
       ++count;
     }
     ++i;
   }
-  // cout << "freq of " << x << ": " <<count << endl;
+  // cout << "freq of " << x << ": " << count << endl;
   return count;
 }
 
 int get_majority_element(vector<int> &a, int left, int right) {
-  int n = right-left-1;
-  // cout << endl << "major: left=" << left << ";right="<< right <<";n=" <<n;
-  if (n <= 0) {
+  int size = a.size();
+
+  int max = (right-left)/2;
+
+  if (size%2 == 0) {
+    ++max;
+  }
+
+  if (left == right) {
     return -1;
   }
-  if (n == 1) {
-    return a[0];
+  if ((left + 1) == right) {
+    return a[left];
   }
 
-  int k = right / 2;
-  // cout << ";k=" << k <<endl;
+  int k = (left + right - 1)/2 + 1;
+  int leftM = get_majority_element(a, left, k);
+  int rightM = get_majority_element(a, k, right);
 
-  if (left > 0) {
-    k = left + (right-left)/2;
+  // cout << "max: " << max << endl;
+
+  int leftCount = get_freq(a, leftM, left, right);
+  if (leftCount > max) {
+    return leftCount;
   }
 
-  // cout << "major: lElem for " << "left="<<0<<";right="<<k<<";n="<< n << endl;
-  int lElem = get_majority_element(a, 0, k);
-  // cout << "major: rElem for " << "left="<<k+1<<";right="<<right<<";n="<<n << endl;
-  int rElem = get_majority_element(a, k+1, right);
-
-  if (lElem == rElem) {
-    return lElem;
-  }
-
-  int lCount = get_freq(a, lElem);
-  // cout << endl << "major: k=" << k << ";lCount="<< lCount << endl;
-  if (lCount >= k+1) {
-    return lElem;
-  }
-
-  int rCount = get_freq(a, rElem);
-  
-  if (rCount >= k+1) {
-    return rElem;
+  int rightCount = get_freq(a, rightM, left, right);
+  if (rightCount > max) {
+    return rightCount;
   }
 
   return -1;
