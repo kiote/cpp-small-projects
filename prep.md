@@ -1,3 +1,7 @@
+# Powers of 2
+
+- memorize!
+
 # Hash table
 
 - how to make array
