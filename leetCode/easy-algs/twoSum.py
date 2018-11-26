@@ -7,10 +7,14 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        for i, n in enumerate(nums):
-            for j, k in enumerate(nums[i+1:-1]):
-                if (n+k == target):
-                    return [n, k]
+        i=0
+        while (i < len(nums)-1):
+            j = i + 1
+            while (j <= len(nums)-1):
+                if (nums[i] + nums[j] == target):
+                    return [i, j]
+                j += 1
+            i += 1
 
 
 solution = Solution()
